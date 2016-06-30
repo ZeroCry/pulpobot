@@ -6,13 +6,13 @@ module PulpoBot
   
       match(/^(?<bot>\w*)\s(?<expression>.*)$/) do |client, data, match| 
         
-        puts "CLIENT: #{client}   |   DATA: #{data}   |   MATCH: #{match[:expression]} " 
+        puts "CLIENT: #{client}   |   DATA: #{data}   |   MATCH: #{match[:expression]} \n " 
         
         expression = match[:expression] 
         
         mp_match = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
         
-        p "MATCH: #{mp_match.inspect} \n"
+        p "MATCH MP: #{mp_match.inspect} \n"
         
         if mp_match
           client.say(channel: data.channel, text: bot.say("#{mp_match[:person]} pagale los #{mp_match[:amount]}"))
