@@ -14,7 +14,7 @@ module PulpoBot
         
         p "MATCH MP: #{mp_match.inspect} \n"
         
-        if mp_match
+        unless mp_match.nil?
           client.say(channel: data.channel, text: bot.say("#{mp_match[:person]} pagale los #{mp_match[:amount]}"))
         else
           client.say(channel: data.channel, text: bot.say(match[:expression]))
