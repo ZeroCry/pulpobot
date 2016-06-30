@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/joelibaceta/mp-sdk-ruby.git
+  revision: 6896a3dac183cdc1788d302b999c2cb346c4f1c1
+  branch: feature-mp-connect
+  specs:
+    mercadopago (1.0.1)
+      activesupport
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -127,6 +135,7 @@ DEPENDENCIES
   cleverbot_io
   dotenv
   foreman
+  mercadopago!
   puma
   rack-test
   rake

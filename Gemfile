@@ -10,6 +10,8 @@ gem 'puma'
 gem 'sinatra'
 gem 'dotenv'
 
+gem 'mercadopago' , :github => 'joelibaceta/mp-sdk-ruby', :branch => "feature-mp-connect"
+
 group :development, :test do
   gem 'rake'
   gem 'foreman'
