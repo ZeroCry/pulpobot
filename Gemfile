@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'slack-ruby-bot'
-gem 'cleverbot-api'
+gem 'cleverbot_io'
 gem 'celluloid'
 gem 'celluloid-io'
 gem 'puma'
