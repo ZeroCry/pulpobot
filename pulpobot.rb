@@ -1,5 +1,4 @@
 require 'slack-ruby-bot'
 require 'cleverbot'
-require 'pulpobot/commands/questions'
-require 'pulpobot/commands/mpago'
+require 'pulpobot/commands/questions' 
 require 'pulpobot/bot'
