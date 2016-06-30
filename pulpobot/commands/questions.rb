@@ -7,6 +7,14 @@ module PulpoBot
         puts "CLIENT: #{client}   |   DATA: #{data}   |   MATCH: #{match[:expression]} " 
         client.say(channel: data.channel, text: bot.say(match[:expression]))
       end
+      match(/^(?@<bot>\w*)\s(?<expression>.*)$/) do |client, data, match| 
+        puts "CLIENT: #{client}   |   DATA: #{data}   |   MATCH: #{match[:expression]} " 
+        client.say(channel: data.channel, text: bot.say(match[:expression]))
+      end
+      match(/^(?<expression>.*)\s(?<bot>\w*)$/) do |client, data, match| 
+        puts "CLIENT: #{client}   |   DATA: #{data}   |   MATCH: #{match[:expression]} " 
+        client.say(channel: data.channel, text: bot.say(match[:expression]))
+      end
     end
   end
 end
