@@ -4,7 +4,7 @@ module PulpoBot
       bot = CleverBot.new
   
       match(/^(?<bot>\w*)\s(?<expression>.*)$/) do |client, data, match| 
-        client.say(channel: data.channel, text: bot.think(match[:expression))
+        client.say(channel: data.channel, text: bot.think(match[:expression]))
       end
     end
   end
