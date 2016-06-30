@@ -2,7 +2,7 @@ module PulpoBot
   module Commands
     
     class MPago < SlackRubyBot::Commands::Base
-      match(/^@(?<bot>\w*): cobrale (?<amount>.*) a (?<person>.*)$/) do |client, data, match|
+      match(/^(?<bot>\w*) cobrale (?<amount>.*) a (?<person>.*)$/) do |client, data, match|
         
         puts "CLIENT: #{client}   |   DATA: #{data}   |   MATCH: #{match.inspect} " 
         
