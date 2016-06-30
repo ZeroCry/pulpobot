@@ -12,6 +12,8 @@ module PulpoBot
         
         mp_match = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
         
+        p "MATCH: #{mp_match.inspect} \n"
+        
         if mp_match
           client.say(channel: data.channel, text: bot.say("#{mp_match[:person]} pagale los #{mp_match[:amount]}"))
         else
