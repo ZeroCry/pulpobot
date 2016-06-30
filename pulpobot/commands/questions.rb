@@ -10,7 +10,7 @@ module PulpoBot
         
         expression = match[:expression] 
         
-        mp_match = /^cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
+        mp_match = /^ cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
         
         if mp_match
           client.say(channel: data.channel, text: bot.say("#{mp_match[:person]} pagale los #{mp_match[:amount]}"))
