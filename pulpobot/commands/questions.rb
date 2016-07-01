@@ -31,8 +31,13 @@ module PulpoBot
           money_request.description   = "PulpoBot Request"
           money_request.concept_type  = "off_platform"
           begin
-            money_request.save
-            client.say(channel: data.channel, text: "#{mp_match_money_request[:person]} pagale los #{mp_match_money_request[:amount]} aqui: #{money_request.init_point}")
+            money_request.save do |response|
+              if response.code.to_s == "200"
+                client.say(channel: data.channel, text: "#{mp_match_money_request[:person]} pagale los #{mp_match_money_request[:amount]} aqui: #{money_request.init_point}")
+              else
+                client.say(channel: data.channel, text: response.message)
+              end
+            end
           rescue Exception => e
             client.say(channel: data.channel, text: e.message)
           end
