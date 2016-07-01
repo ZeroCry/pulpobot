@@ -47,7 +47,7 @@ module PulpoBot
                 if @mp_account.nil? 
                   client.say(channel: data.channel, text: "Ok, cual es tu mail de MercadoPago?")
                 else
-                  error_msg = JSON.parse(response.body)["message"]
+                  error_msg = JSON.parse(response.body)["message"] rescue " "
                   client.say(channel: data.channel, text: "#{response.message} : #{error_msg}")
                   
                 end
