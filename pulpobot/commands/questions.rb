@@ -45,6 +45,9 @@ module PulpoBot
               end
             end
           rescue Exception => e
+            puts " \n ============== \n"
+            puts "ERROR: #{e}"
+            puts " \n ============== \n"
             client.say(channel: data.channel, text: e.message)
           end
             
