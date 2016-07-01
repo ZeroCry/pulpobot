@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/joelibaceta/mp-sdk-ruby.git
-  revision: 6896a3dac183cdc1788d302b999c2cb346c4f1c1
+  revision: 627b68ee2200867b03826732af5676619d013a18
   branch: feature-mp-connect
   specs:
     mercadopago (1.0.1)
@@ -9,11 +9,10 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (4.2.6)
+    activesupport (5.0.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
-      json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
     celluloid (0.17.3)
@@ -40,6 +39,7 @@ GEM
     cleverbot_io (1.2.2)
       httpclient (~> 2.8)
       oj (~> 2.15)
+    concurrent-ruby (1.0.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
@@ -65,7 +65,7 @@ GEM
     hitimes (1.2.4)
     httpclient (2.8.0)
     i18n (0.7.0)
-    json (1.8.3)
+    json (2.0.1)
     launchy (2.4.3)
       addressable (~> 2.3)
     minitest (5.9.0)
