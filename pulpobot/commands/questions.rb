@@ -49,6 +49,7 @@ module PulpoBot
                 else
                   error_msg = JSON.parse(response.body)["message"]
                   client.say(channel: data.channel, text: "#{response.message} : #{error_msg}")
+                  
                 end
                 
               end
@@ -57,7 +58,8 @@ module PulpoBot
             puts " \n ============== \n"
             puts "ERROR: #{e}"
             puts " \n ============== \n"
-            client.say(channel: data.channel, text: e.inspect)
+            client.say(channel: data.channel, text: e.message)
+            client.say(channel: data.channel, text: e.backtrace)
           end
             
         else
