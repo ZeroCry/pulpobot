@@ -40,7 +40,7 @@ module PulpoBot
               if response.code.to_s == "200" 
                 client.say(channel: data.channel, text: "#{mp_match_money_request[:person]} pagale los #{mp_match_money_request[:amount]} aqui: #{money_request.init_point}")
               else 
-                client.say(channel: data.channel, text: response.message)
+                client.say(channel: data.channel, text: %W(#{response.message} : #{response.body["response.message"]}))
               end
             end
           rescue Exception => e
