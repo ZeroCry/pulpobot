@@ -40,8 +40,13 @@ module PulpoBot
               if response.code.to_s == "200" 
                 client.say(channel: data.channel, text: "#{mp_match_money_request[:person]} pagale los #{mp_match_money_request[:amount]} aqui: #{money_request.init_point}")
               else 
-                error_msg = JSON.parse(response.body)["message"]
-                client.say(channel: data.channel, text: "#{response.message} : #{error_msg}")
+                if @mp_account.nil? 
+                  client.say(channel: data.channel, text: "Ok, cual es tu mail de MercadoPago?")
+                else
+                  error_msg = JSON.parse(response.body)["message"]
+                  client.say(channel: data.channel, text: "#{response.message} : #{error_msg}")
+                end
+                
               end
             end
           rescue Exception => e
