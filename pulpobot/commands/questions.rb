@@ -23,7 +23,7 @@ module PulpoBot
           
           @mp_accounts[mp_account_request[:person]] = mail_match[:email]
           
-          client.say(channel: data.channel, text: "Dale #{mail_match[:email]}")
+          client.say(channel: data.channel, text: ["Guardado", "Ok!", "Dale"].sample)
         
         elsif mp_match_money_request != nil 
           
