@@ -63,7 +63,7 @@ module PulpoBot
           end
             
         elsif wanna_joke
-          jokes = Json.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
+          jokes = JSON.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
           
           client.say(channel: data.channel, text: "Ok")
           client.say(channel: data.channel, text: jokes.sample["joke"])
