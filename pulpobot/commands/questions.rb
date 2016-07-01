@@ -41,14 +41,14 @@ module PulpoBot
               puts response
               puts " \n ============== \n"
               
-              if response.code.to_s == "200" 
+              if response.code.to_s == "200" || response.code.to_s == "201" 
                 client.say(channel: data.channel, text: "#{mp_match_money_request[:person]} pagale los #{mp_match_money_request[:amount]} aqui: #{money_request.init_point}")
               else 
                 if @mp_account.nil? 
                   client.say(channel: data.channel, text: "Ok, cual es tu mail de MercadoPago?")
                 else
                   error_msg = JSON.parse(response.body)["message"] rescue " "
-                  client.say(channel: data.channel, text: "#{response.message} : #{error_msg}")
+                  client.say(channel: data.channel, text: "#{response.code} #{response.message} : #{error_msg}")
                   
                 end
                 
