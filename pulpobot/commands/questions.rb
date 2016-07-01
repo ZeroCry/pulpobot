@@ -24,7 +24,7 @@ module PulpoBot
           
           @mp_account = mail_match[:email]
           
-          client.say(channel: data.channel, text: "Dale #{mail_match}")
+          client.say(channel: data.channel, text: "Dale #{mail_match[:email]}")
         
         elsif mp_match_money_request != nil 
           
@@ -57,7 +57,7 @@ module PulpoBot
             puts " \n ============== \n"
             puts "ERROR: #{e}"
             puts " \n ============== \n"
-            client.say(channel: data.channel, text: e.message)
+            client.say(channel: data.channel, text: e.inspect)
           end
             
         else
