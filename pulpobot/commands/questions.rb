@@ -24,7 +24,7 @@ module PulpoBot
           
           @mp_account = mail
           
-          client.say(channel: data.channel, text: "Dale")
+          client.say(channel: data.channel, text: "Dale #{mail}")
         
         elsif mp_match_money_request != nil 
           
