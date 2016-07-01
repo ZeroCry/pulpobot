@@ -31,7 +31,7 @@ module PulpoBot
           money_request       = MercadoPago::MoneyRequest.new
           money_request.currency_id   = "ARS"
           money_request.amount        = mp_match_money_request[:amount].scan(/\d/).join('').to_f
-          money_request.collector_email = @mp_account
+          money_request.collector_email = "mail@joelibaceta.com"
           money_request.payer_email   = "custom@mail.com"
           money_request.description   = "PulpoBot Request"
           money_request.concept_type  = "off_platform"
