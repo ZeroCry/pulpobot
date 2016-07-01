@@ -66,7 +66,7 @@ module PulpoBot
           jokes = Json.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
           
           client.say(channel: data.channel, text: "Ok")
-          client.say(channel: data.channel, text: jokes.sample)
+          client.say(channel: data.channel, text: jokes.sample["joke"])
         else
           client.say(channel: data.channel, text: bot.say(match[:expression]))
         end
