@@ -20,7 +20,9 @@ module PulpoBot
         
         if mp_account_request != nil
           
-          @mp_account = mp_account_request[:account]
+          mail = /.*:(?<email>.*)\|/.match(mp_account_request[:account])[:email]
+          
+          @mp_account = mail
           
           client.say(channel: data.channel, text: "Dale")
         
