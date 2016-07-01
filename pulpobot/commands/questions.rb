@@ -13,15 +13,15 @@ module PulpoBot
         expression = match[:expression] 
         
         mp_match_money_request = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
-        mp_account_request = /^el email de mercadopago de (?<person>.*) es (?<account>.*)$/.match(expression)
+        mp_account_request = /el email de mercadopago de (?<person>.*) es (?<account>.*)$/.match(expression)
         
-        p "MATCH MP: #{mp_match_money_request.inspect} \n"
+        p "MATCH MP: #{mp_account_request.inspect} \n"
         
         if mp_account_request != nil
           
           mail_match = /.*:(?<email>.*)\|/.match(mp_account_request[:account])
           
-          @mp_accounts[mail_match[:person]] = mail_match[:email]
+          @mp_accounts[mp_account_request[:person]] = mail_match[:email]
           
           client.say(channel: data.channel, text: "Dale #{mail_match[:email]}")
         
