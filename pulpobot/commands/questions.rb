@@ -34,7 +34,7 @@ module PulpoBot
             money_request.save
             client.say(channel: data.channel, text: "#{mp_match_money_request[:person]} pagale los #{mp_match_money_request[:amount]} aqui: #{money_request.init_point}")
           rescue Exception => e
-            client.say(channel: data.channel, text: e.message
+            client.say(channel: data.channel, text: e.message)
           end
            
           
