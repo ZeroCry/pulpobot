@@ -13,7 +13,7 @@ module PulpoBot
         mp_match_money_request = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
         
         
-        p "MATCH MP: #{mp_match.inspect} \n"
+        p "MATCH MP: #{mp_match_money_request.inspect} \n"
         
         if mp_match_money_request != nil 
           
