@@ -14,6 +14,7 @@ module PulpoBot
         
         mp_match_money_request = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
         mp_account_request = /el email de mercadopago de (?<person>.*) es (?<account>.*)$/.match(expression)
+        wanna_joke = /(chiste)/
         
         p "MATCH MP: #{mp_account_request.inspect} \n"
         
@@ -61,6 +62,11 @@ module PulpoBot
             client.say(channel: data.channel, text: e.backtrace)
           end
             
+        elsif wanna_joke
+          jokes = Json.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
+          
+          client.say(channel: data.channel, text: "Ok")
+          client.say(channel: data.channel, text: jokes.sample)
         else
           client.say(channel: data.channel, text: bot.say(match[:expression]))
         end
