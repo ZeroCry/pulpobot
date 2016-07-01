@@ -4,7 +4,7 @@ module PulpoBot
       
       bot = Cleverbot.new('1d4seUHqQlPX1iTE', 'pU2ZVB0g0cRkGiFIbxVcSdczvcW87V3K')
       
-      @mp_account = ""
+      @mp_accounts = Hash.new
   
       match(/^(?<bot>\w*)\s(?<expression>.*)$/) do |client, data, match| 
         
@@ -13,8 +13,7 @@ module PulpoBot
         expression = match[:expression] 
         
         mp_match_money_request = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
-        mp_account_request = /^mi email de mercadopago es (?<account>.*)$/.match(expression)
-        
+        mp_account_request = /^el email de mercadopago de (?<person>.*) es (?<account>.*)$/.match(expression)
         
         p "MATCH MP: #{mp_match_money_request.inspect} \n"
         
@@ -22,7 +21,7 @@ module PulpoBot
           
           mail_match = /.*:(?<email>.*)\|/.match(mp_account_request[:account])
           
-          @mp_account = mail_match[:email]
+          @mp_accounts[mail_match[:person]] = mail_match[:email]
           
           client.say(channel: data.channel, text: "Dale #{mail_match[:email]}")
         
@@ -30,9 +29,8 @@ module PulpoBot
           
           money_request       = MercadoPago::MoneyRequest.new
           money_request.currency_id   = "ARS"
-          money_request.amount        = mp_match_money_request[:amount].scan(/\d/).join('').to_f
-          money_request.collector_email = "mail@joelibaceta.com"
-          money_request.payer_email   = "custom@mail.com"
+          money_request.amount        = mp_match_money_request[:amount].scan(/\d/).join('').to_f 
+          money_request.payer_email   = @mp_accounts[mp_match_money_request[:person]]
           money_request.description   = "PulpoBot Request"
           money_request.concept_type  = "off_platform"
           begin
