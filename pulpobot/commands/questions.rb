@@ -21,6 +21,8 @@ module PulpoBot
         if mp_account_request != nil
           
           @mp_account = mp_account_request[:account]
+          
+          client.say(channel: data.channel, text: "Dale")
         
         elsif mp_match_money_request != nil 
           
