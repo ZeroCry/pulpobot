@@ -6,6 +6,7 @@ module PulpoBot
       
       @mp_accounts = Hash.new
       @guardia = nil
+      @numbers = Hash.new
   
       match(/^(?<bot>\w*)\s(?<expression>.*)$/) do |client, data, match| 
          
@@ -16,6 +17,8 @@ module PulpoBot
         wanna_joke = /(chiste)/.match(expression)
         set_guard_person = /(?<person>.*) esta de guardia$/.match(expression)
         get_guard_person = /(quien esta de guardia)/.match(expression)
+        send_a_sms = /enviale un sms a (?<person>.*) y dile (?<message>.*)/
+        save_a_number = /el numero de (?<person>.*) es (?<number>.*)/
         
         if mp_account_request != nil
           
@@ -57,8 +60,16 @@ module PulpoBot
         elsif get_guard_person != nil
           
           @guardia ||= "Nadie esta de guardia :white_frowning_face: "
-          client.say(channel: data.channel, text: @guardia)  
-          
+          client.say(channel: data.channel, text: @guardia)
+        elsif save_a_number != nil
+          @numbers[save_a_number[:person]] = save_a_number[:number]
+          client.say(channel: data.channel, text: ["Guardado", "Ok!", "Dale"].sample) 
+        elsif send_a_sms != nil
+          if @numbers[send_a_sms[:person]] 
+            `curl "https://rest.nexmo.com/sms/json?api_key=5674d76d&api_secret=354efe58d01a3b7a&from=NEXMO&to=#{@numbers[send_a_sms[:person]] }&text=#{send_a_sms[:message].split(' ').join('+')}"`
+          else
+            client.say(channel: data.channel, text: "No tengo el numero de send_a_sms[:person] :white_frowning_face:")
+          end
         elsif wanna_joke != nil
           
           jokes = JSON.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
