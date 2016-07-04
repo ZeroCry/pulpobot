@@ -14,8 +14,8 @@ module PulpoBot
         mp_match_money_request = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
         mp_account_request = /el email de mercadopago de (?<person>.*) es (?<account>.*)$/.match(expression)
         wanna_joke = /(chiste)/.match(expression)
-        set_guard_person = /(?<person>.*) esta de guardia $/.match(expression)
-        get_guard_person = /quien esta de guardia ?$/.match(expression)
+        set_guard_person = /(?<person>.*) esta de guardia$/.match(expression)
+        get_guard_person = /quien esta de guardia?$/.match(expression)
         
         if mp_account_request != nil
           
@@ -49,12 +49,16 @@ module PulpoBot
             client.say(channel: data.channel, text: e.message)
             client.say(channel: data.channel, text: e.backtrace)
           end
+          
         elsif set_guard_person != nil
           @guardia = set_guard_person[:person]
+          
           client.say(channel: data.channel, text: ["Guardado", "Ok!", "Dale"].sample)
         elsif get_guard_person != nil
+          
           @guardia ||= "Nadie esta de guardia :C "
           client.say(channel: data.channel, text: @guardia)  
+          
         elsif wanna_joke != nil
           
           jokes = JSON.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
