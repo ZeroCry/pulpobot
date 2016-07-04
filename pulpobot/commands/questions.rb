@@ -55,7 +55,7 @@ module PulpoBot
         elsif get_guard_person != nil
           @guardia ||= "Nadie esta de guardia :C "
           client.say(channel: data.channel, text: @guardia)  
-        elsif wanna_joke
+        elsif wanna_joke != nil
           
           jokes = JSON.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
           
