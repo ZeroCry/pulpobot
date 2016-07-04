@@ -15,7 +15,7 @@ module PulpoBot
         mp_account_request = /el email de mercadopago de (?<person>.*) es (?<account>.*)$/.match(expression)
         wanna_joke = /(chiste)/.match(expression)
         set_guard_person = /(?<person>.*) esta de guardia$/.match(expression)
-        get_guard_person = /quien esta de guardia?$/.match(expression)
+        get_guard_person = /(quien esta de guardia)/.match(expression)
         
         if mp_account_request != nil
           
