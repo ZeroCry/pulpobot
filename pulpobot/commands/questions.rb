@@ -13,7 +13,7 @@ module PulpoBot
         
         mp_match_money_request = /cobrale (?<amount>.*) a (?<person>.*)$/.match(expression)
         mp_account_request = /el email de mercadopago de (?<person>.*) es (?<account>.*)$/.match(expression)
-        wanna_joke = /(chiste)/ 
+        wanna_joke = /(chiste)/.match(expression)
         set_guard_person = /(?<person>.*) esta de guardia $/.match(expression)
         get_guard_person = /quien esta de guardia ?$/.match(expression)
         
