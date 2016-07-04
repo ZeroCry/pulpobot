@@ -67,6 +67,7 @@ module PulpoBot
         elsif send_a_sms != nil
           if @numbers[send_a_sms[:person]] 
             `curl "https://rest.nexmo.com/sms/json?api_key=5674d76d&api_secret=354efe58d01a3b7a&from=NEXMO&to=#{@numbers[send_a_sms[:person]] }&text=#{send_a_sms[:message].split(' ').join('+')}"`
+            client.say(channel: data.channel, text: "enviado.")
           else
             client.say(channel: data.channel, text: "No tengo el numero de send_a_sms[:person] :white_frowning_face:")
           end
