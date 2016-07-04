@@ -44,17 +44,17 @@ module PulpoBot
                 end 
               end
             end
-          elsif set_guard_person != nil
-            @guardia = set_guard_person[:person]
-            client.say(channel: data.channel, text: ["Guardado", "Ok!", "Dale"].sample)
-          elsif get_guard_person != nil
-            @guardia ||= "Nadie esta de guardia :C "
-            client.say(channel: data.channel, text: @guardia)
+          
           rescue Exception => e 
             client.say(channel: data.channel, text: e.message)
             client.say(channel: data.channel, text: e.backtrace)
           end
-            
+        elsif set_guard_person != nil
+          @guardia = set_guard_person[:person]
+          client.say(channel: data.channel, text: ["Guardado", "Ok!", "Dale"].sample)
+        elsif get_guard_person != nil
+          @guardia ||= "Nadie esta de guardia :C "
+          client.say(channel: data.channel, text: @guardia)  
         elsif wanna_joke
           
           jokes = JSON.parse(File.open(File.dirname(__FILE__) + '/jokes.json').read)
