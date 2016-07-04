@@ -17,8 +17,8 @@ module PulpoBot
         wanna_joke = /(chiste)/.match(expression)
         set_guard_person = /(?<person>.*) esta de guardia$/.match(expression)
         get_guard_person = /(quien esta de guardia)/.match(expression)
-        send_a_sms = /enviale un sms a (?<person>.*) y dile (?<message>.*)/
-        save_a_number = /el numero de (?<person>.*) es (?<number>.*)/
+        send_a_sms = /enviale un sms a (?<person>.*) y dile (?<message>.*)/.match(expression)
+        save_a_number = /el numero de (?<person>.*) es (?<number>.*)/.match(expression)
         
         if mp_account_request != nil
           
