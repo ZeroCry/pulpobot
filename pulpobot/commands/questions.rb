@@ -56,7 +56,7 @@ module PulpoBot
           client.say(channel: data.channel, text: ["Guardado", "Ok!", "Dale"].sample)
         elsif get_guard_person != nil
           
-          @guardia ||= "Nadie esta de guardia :C "
+          @guardia ||= "Nadie esta de guardia :white_frowning_face: "
           client.say(channel: data.channel, text: @guardia)  
           
         elsif wanna_joke != nil
