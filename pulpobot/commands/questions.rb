@@ -54,7 +54,7 @@ module PulpoBot
             client.say(channel: data.channel, text: e.backtrace)
           end
         elsif panther != nil
-          client.say(channel: data.channel, text: "@cris")
+          client.say(channel: data.channel, text: "@cris:")
         elsif set_guard_person != nil
           @guardia = set_guard_person[:person]
           
