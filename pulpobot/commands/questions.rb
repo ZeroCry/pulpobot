@@ -19,6 +19,7 @@ module PulpoBot
         get_guard_person = /(quien esta de guardia)/.match(expression)
         send_a_sms = /enviale un sms a (?<person>.*) y dile (?<message>.*)/.match(expression)
         save_a_number = /el numero de (?<person>.*) es (?<number>.*)/.match(expression)
+        panther = /(la pantera)/.match(expression)
         
         if mp_account_request != nil
           
@@ -52,7 +53,8 @@ module PulpoBot
             client.say(channel: data.channel, text: e.message)
             client.say(channel: data.channel, text: e.backtrace)
           end
-          
+        elsif panther != nil
+          client.say(channel: data.channel, text: "@cris")
         elsif set_guard_person != nil
           @guardia = set_guard_person[:person]
           
