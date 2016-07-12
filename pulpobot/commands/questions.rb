@@ -63,7 +63,7 @@ module PulpoBot
           request = Net::HTTP::Get.new(uri.request_uri)
           
           response = http.request(request)
-          puts "RESPONSE: #{response}"
+          puts "RESPONSE: #{response} | URI: #{uri}"
           result = JSON.parse(response.body)
           
           client.web_client.chat_postMessage(
