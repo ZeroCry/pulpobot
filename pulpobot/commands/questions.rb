@@ -64,6 +64,8 @@ module PulpoBot
             
           result = JSON.parse(file.read)
           
+          desc = %Q(Abilities: #{result["abilities"].map{|item| item["ability"]["name"]}.join(", ")} \n Peso: #{result["weight"]} \n "Altura: #{result["height"]} \n Tipos: #{result["types"].map{|item| item["type"]["name"]}.join(", ")}")
+          
           client.web_client.chat_postMessage(
               channel: data.channel,
               as_user: true,
@@ -71,7 +73,7 @@ module PulpoBot
                               {
                                 title: pokemon[:pokemon],
                                 thumb_url: result["sprites"]["front_default"],
-                                text: %W(Abilities: #{result["abilities"].map{|item| item["ability"]["name"]}.join(", ")} \n Peso: #{result["weight"]} \n "Altura: #{result["height"]} \n Tipos: #{result["types"].map{|item| item["type"]["name"]}.join(", ")}") 
+                                text: desc
                               }
                             ]
           )
