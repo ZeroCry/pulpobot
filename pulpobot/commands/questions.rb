@@ -1,3 +1,5 @@
+require 'net/http'
+
 module PulpoBot
   module Commands
     class Questions < SlackRubyBot::Commands::Base
@@ -19,7 +21,9 @@ module PulpoBot
         get_guard_person = /(quien esta de guardia)/.match(expression)
         send_a_sms = /enviale un sms a (?<person>.*) y dile (?<message>.*)/.match(expression)
         save_a_number = /el numero de (?<person>.*) es (?<number>.*)/.match(expression)
-        panther = /(la pantera)/.match(expression)
+        panther = /(la pantera)/.match(expression) 
+        
+        pokemon = /(pokedex) (?<pokemon>.*)/.match(expression) 
         
         if mp_account_request != nil
           
@@ -53,6 +57,26 @@ module PulpoBot
             client.say(channel: data.channel, text: e.message)
             client.say(channel: data.channel, text: e.backtrace)
           end
+        elsif pokemon != nil
+          uri = URI.parse("http://pokeapi.co/api/v2/pokemon/#{pokemon[:pokemon]}")
+          http = Net::HTTP.new(uri.host, uri.port)
+          request = Net::HTTP::Get.new(uri.request_uri)
+          
+          response = http.request(request)
+          result = JSON.parse(response.body)
+          
+          client.web_client.chat_postMessage(
+              channel: data.channel,
+              as_user: true,
+              attachments:  [
+                              {
+                                title: pokemon[:pokemon],
+                                thumb_url: result["sprites"]["front_default"],
+                                text: %W(Abilities: #{result["abilities"].map{|item| item["ability"]["name"]}.join(", ")} \n Peso: #{result["weight"]} \n "Altura: #{result["height"]} \n Tipos: #{result["types"].map{|item| item["type"]["name"]}.join(", ")}") 
+                              }
+                            ]
+          )
+          
         elsif panther != nil
           client.say(channel: data.channel, text: "@cris:")
         elsif set_guard_person != nil
