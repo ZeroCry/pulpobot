@@ -1,4 +1,6 @@
 require 'net/http'
+require 'open-uri'
+require 'json'
 
 module PulpoBot
   module Commands
@@ -58,13 +60,9 @@ module PulpoBot
             client.say(channel: data.channel, text: e.backtrace)
           end
         elsif pokemon != nil
-          uri = URI.parse("http://pokeapi.co/api/v2/pokemon/#{pokemon[:pokemon]}")
-          http = Net::HTTP.new(uri.host, uri.port)
-          request = Net::HTTP::Get.new(uri.request_uri)
-          
-          response = http.request(request)
-          puts "RESPONSE: #{response} | URI: #{uri}"
-          result = JSON.parse(response.body)
+          file = open("http://pokeapi.co/api/v2/pokemon/#{pokemon[:pokemon]}")
+            
+          result = JSON.parse(file.read)
           
           client.web_client.chat_postMessage(
               channel: data.channel,
