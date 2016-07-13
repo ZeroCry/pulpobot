@@ -90,7 +90,7 @@ module PulpoBot
           
           puts "RESULT: #{data.inspect}"
           
-          client.say(channel: data.channel, text: "#{data[:type]} - #{data[:score]}")
+          client.say(channel: data.channel, text: %Q(#{data["type"]} - #{data["score"]})) 
           
         elsif pokemon != nil
           
