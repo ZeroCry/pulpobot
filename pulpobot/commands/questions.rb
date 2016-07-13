@@ -86,11 +86,11 @@ module PulpoBot
           
           
           
-          data = JSON.parse(response.body)
+          result = JSON.parse(response.body)
           
-          puts "RESULT: #{data.inspect}"
+          puts "RESULT: #{result.inspect}"
           
-          client.say(channel: data.channel, text: %Q(#{data["type"]} - #{data["score"]})) 
+          client.say(channel: data.channel, text: %Q(#{result["type"]} - #{result["score"]})) 
           
         elsif pokemon != nil
           
