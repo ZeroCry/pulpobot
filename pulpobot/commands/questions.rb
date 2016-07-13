@@ -70,7 +70,7 @@ module PulpoBot
           
           puts "RESULT: #{result.inspect}"
           
-          trasnlated = result[:text].join(" ")
+          trasnlated = result["text"].join(" ")
           
           uri = URI.parse("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
           
@@ -84,7 +84,11 @@ module PulpoBot
             http.request(request)
           end
           
+          
+          
           data = JSON.parse(response.body)
+          
+          puts "RESULT: #{data.inspect}"
           
           client.say(channel: data.channel, text: "#{data[:type]} - #{data[:score]}")
           
