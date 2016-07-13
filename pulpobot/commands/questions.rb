@@ -24,6 +24,7 @@ module PulpoBot
         send_a_sms = /enviale un sms a (?<person>.*) y dile (?<message>.*)/.match(expression)
         save_a_number = /el numero de (?<person>.*) es (?<number>.*)/.match(expression)
         panther = /(la pantera)/.match(expression) 
+        sentiment_analysis = /(haz un analisis de sentimiento de) (?<prhase>.*) /.match(expression) 
         
         pokemon = /(pokedex) (?<pokemon>.*)/.match(expression) 
         
@@ -59,6 +60,32 @@ module PulpoBot
             client.say(channel: data.channel, text: e.message)
             client.say(channel: data.channel, text: e.backtrace)
           end
+        elsif sentiment_analysis != nil
+          
+          uri_trasnlate = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160713T211117Z.250bd295ce2d1043.e4530217cbbab3ee462d241ecb1ae5887ac505fd&text=#{sentiment_analysis[:prhase].gsub(' ', '+')}&lang=es-en"
+          
+          file = open(uri_trasnlate)
+          
+          result = JSON.parse(file.read)
+          
+          trasnlated = result[:text].join(" ")
+          
+          uri = URI.parse("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
+          
+          request = Net::HTTP::Post.new(uri)
+          request.content_type = "application/x-www-form-urlencoded"
+          request["X-Mashape-Key"] = "hubWV8Cbqdmsh2JNt6GGT7JygXPep12RcTdjsnGwx4WV1fz1wg"
+          request["Accept"] = "application/json"
+          request.body = "text=#{trasnlated}"
+          
+          response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
+            http.request(request)
+          end
+          
+          data = JSON.parse(response.body)
+          
+          client.say(channel: data.channel, text: "#{data[:type]} - #{data[:score]}")
+          
         elsif pokemon != nil
           file = open("http://pokeapi.co/api/v2/pokemon/#{pokemon[:pokemon]}")
             
