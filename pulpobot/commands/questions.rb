@@ -68,6 +68,8 @@ module PulpoBot
           
           result = JSON.parse(file.read)
           
+          puts "RESULT: #{result.inspect}"
+          
           trasnlated = result[:text].join(" ")
           
           uri = URI.parse("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
@@ -87,6 +89,7 @@ module PulpoBot
           client.say(channel: data.channel, text: "#{data[:type]} - #{data[:score]}")
           
         elsif pokemon != nil
+          
           file = open("http://pokeapi.co/api/v2/pokemon/#{pokemon[:pokemon]}")
             
           result = JSON.parse(file.read)
