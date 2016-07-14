@@ -26,7 +26,7 @@ module PulpoBot
         panther = /(la pantera)/.match(expression) 
         sentiment_analysis = /(haz un analisis de sentimiento de) (?<prhase>.*) /.match(expression) 
         
-        how_do_you_say_it = /(como se dice) (?<prhase>.*) (en ruso)/
+        how_do_you_say_it = /(como se dice) (?<prhase>.*) (en ruso)/.match(expression) 
         
         pokemon = /(pokedex) (?<pokemon>.*)/.match(expression) 
         
