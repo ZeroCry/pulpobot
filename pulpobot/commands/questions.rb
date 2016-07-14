@@ -26,7 +26,10 @@ module PulpoBot
         panther = /(la pantera)/.match(expression) 
         sentiment_analysis = /(haz un analisis de sentimiento de) (?<prhase>.*) /.match(expression) 
         
+        how_do_you_say_it = /(como se dice) (?<prhase>.*) (en ruso)/
+        
         pokemon = /(pokedex) (?<pokemon>.*)/.match(expression) 
+        
         
         if mp_account_request != nil
           
@@ -34,6 +37,26 @@ module PulpoBot
           @mp_accounts[mp_account_request[:person]] = mail_match[:email] 
           client.say(channel: data.channel, text: ["Guardado", "Ok!", "Dale"].sample)
         
+        elsif how_do_you_say_it != nil
+          
+          uri_trasnlate = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160713T211117Z.250bd295ce2d1043.e4530217cbbab3ee462d241ecb1ae5887ac505fd&text=#{how_do_you_say_it[:prhase].gsub(' ', '+')}&lang=es-ru"
+          
+          file = open(uri_trasnlate)
+          
+          result = JSON.parse(file.read)
+           
+          translated = result["text"].join(" ")
+          
+          client.web_client.chat_postMessage(
+              channel: data.channel,
+              as_user: true,
+              attachments:  [
+                              { 
+                                text: translated
+                              }
+                            ]
+          )
+          
         elsif mp_match_money_request != nil 
           
           money_request       = MercadoPago::MoneyRequest.new
@@ -67,10 +90,8 @@ module PulpoBot
           file = open(uri_trasnlate)
           
           result = JSON.parse(file.read)
-          
-          puts "RESULT: #{result.inspect}"
-          
-          trasnlated = result["text"].join(" ")
+           
+          translated = result["text"].join(" ")
           
           uri = URI.parse("https://twinword-sentiment-analysis.p.mashape.com/analyze/")
           
@@ -78,7 +99,7 @@ module PulpoBot
           request.content_type = "application/x-www-form-urlencoded"
           request["X-Mashape-Key"] = "hubWV8Cbqdmsh2JNt6GGT7JygXPep12RcTdjsnGwx4WV1fz1wg"
           request["Accept"] = "application/json"
-          request.body = "text=#{trasnlated}"
+          request.body = "text=#{translated}"
           
           response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == "https") do |http|
             http.request(request)
